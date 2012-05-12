@@ -1,4 +1,5 @@
 LDFLAGS = -b elf32-i386 --oformat=elf32-i386 -melf_i386
+OBJ = obj/boilerplate.o obj/kernel_base.o obj/kloader_print.o
 
 default:
 	mkdir -p obj
@@ -6,7 +7,7 @@ default:
 	cd x86 && make
 	cp -f x86/*.o obj
 	cp -f x86/asm/*.o obj
-	$(LD) -T link_x86.ld -o bin/kernel.bin obj/boilerplate.o obj/kernel_base.o $(LDFLAGS)
+	$(LD) -T link_x86.ld -o bin/kernel.bin $(OBJ)  $(LDFLAGS)
 
 clean:
 	cd x86 && make clean
