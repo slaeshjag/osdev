@@ -3,6 +3,7 @@
 
 
 #include "kloader_print.h"
+#include "gdt.h"
 
 
 #endif
