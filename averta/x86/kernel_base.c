@@ -10,7 +10,9 @@ int  k_mem_occupied(MBOOT_TABLE *mboot, unsigned int addr) {
 	for (i = 0; i < mboot->mods_count; i++)
 		if (addr >= (unsigned int) mboot->mods_addr[i].mod_start &&
 			addr < (unsigned int) mboot->mods_addr[i].mod_end)
-				return 0;
+				return 1;
+	if (addr + 0x1000 > (unsigned int) mboot->mmap && addr < (unsigned int) mboot->mmap + mboot->mmap_len)
+		return 1;
 	return 0;
 }
 
