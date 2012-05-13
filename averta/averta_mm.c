@@ -17,6 +17,34 @@ void kinit_mtable(struct AVERTA_MEMTABLE_FREE *table) {
 }
 
 
+void *k_malloc() {
+	extern AVERTA_KERNEL_RC k_rc;
+	int i;
+	void *ptr;
+
+	if (k_rc.mem_free.last_entry == NULL)
+		return NULL;
+
+	#ifdef _32BIT_MEMADDR
+	for (i = 0; i < 1022 && k_rc.mem_free.last_entry->ptr[i] != NULL; i++);
+	#else
+	for (i = 0; i < 510 && k_rc.mem_free.last_entry->ptr[i] != NULL; i++);
+	#endif
+	i--;
+
+	if (i == -1) {
+		ptr = k_rc.mem_free.last_entry;
+		k_rc.mem_free.last_entry = k_rc.mem_free.last_entry->back;
+		return ptr;
+	}
+
+	ptr = k_rc.mem_free.last_entry->ptr[i];
+	k_rc.mem_free.last_entry->ptr[i] = NULL;
+	return ptr;
+}
+	
+
+
 void k_free(void *ptr) {
 	extern AVERTA_KERNEL_RC k_rc;
 	struct AVERTA_MEMTABLE_FREE *table = ptr;
