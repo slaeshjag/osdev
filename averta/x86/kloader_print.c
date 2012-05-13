@@ -53,6 +53,11 @@ KLOAD_PRINT kload_print_chr(KLOAD_PRINT print, char c) {
 				print.y--;
 			}
 			break;
+		case '\r':
+			print.x--;
+			if (print.x < 0)
+				print.x = 0;
+			break;
 		default:
 			vram[print.x*2 + print.y * KLOAD_PRINT_TTY_W*2] = c;
 			vram[print.x*2 + print.y * KLOAD_PRINT_TTY_W*2 + 1] = 0x07;
