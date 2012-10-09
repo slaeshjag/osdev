@@ -1,6 +1,6 @@
 LDFLAGS = -b elf32-i386 --oformat=elf32-i386 -melf_i386
-OBJ = obj/boilerplate.o obj/kernel_base.o obj/kloader_print.o obj/averta_mm.o
-CFLAGS += -Wall -Wextra -nostdlib -fno-builtin -nostartfiles -nodefaultlibs -m32
+OBJ = obj/boilerplate.o obj/loadgdt.o obj/kernel_base.o obj/kloader_print.o obj/paging.o obj/paging_s.o obj/averta_mm.o obj/gdt.o
+CFLAGS += -Wall -Wextra -nostdlib -fno-builtin -nostartfiles -nodefaultlibs -m32 -g
 
 default:
 	mkdir -p obj

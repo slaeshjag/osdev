@@ -9,6 +9,10 @@
 
 typedef struct {
 	AVERTA_MEM_FREE		mem_free;
+	void			*platform;
 } AVERTA_KERNEL_RC;
+
+
+extern AVERTA_KERNEL_RC k_rc;
 
 #endif

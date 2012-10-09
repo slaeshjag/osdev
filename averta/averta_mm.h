@@ -17,9 +17,12 @@ typedef struct {
 	struct AVERTA_MEMTABLE_FREE	*table;
 	struct AVERTA_MEMTABLE_FREE	*last_entry;
 	unsigned int			pages_free;
+	unsigned int			page_size;
 } AVERTA_MEM_FREE;
 
 void k_free(void *ptr);
+void *k_malloc();
+void kinit_mtable(struct AVERTA_MEMTABLE_FREE *table);
 
 
 #endif
